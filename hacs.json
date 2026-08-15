@@ -1,3 +1,6 @@
 {
-  "name": "1st Energy"
+  "name": "1st Energy",
+  "homeassistant": "2026.2.0",
+  "country": ["AU"],
+  "render_readme": true
 }
