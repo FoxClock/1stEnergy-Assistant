@@ -1,0 +1,54 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "1st Energy",
+        "description": "Sign in with the email address and password you use for the 1st Energy customer portal.",
+        "data": {
+          "username": "Email address",
+          "password": "Password"
+        }
+      },
+      "account": {
+        "title": "Choose an account",
+        "description": "This login covers more than one electricity account. Add one now; you can add the others afterwards.",
+        "data": {
+          "account_id": "Account"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Sign in again",
+        "description": "1st Energy rejected the saved password for {username}. Enter it again to reconnect.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach 1st Energy. This usually clears on its own; if it persists, they may have changed their site.",
+      "invalid_auth": "That email address and password were rejected. Check them by signing in at myaccount.1stenergy.com.au.",
+      "no_accounts": "That login has no electricity connection attached to it.",
+      "unknown": "Something unexpected went wrong. Check the Home Assistant log for details."
+    },
+    "abort": {
+      "already_configured": "That account has already been added.",
+      "reauth_successful": "Reconnected to 1st Energy."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "balance": {
+        "name": "Account balance"
+      },
+      "next_invoice_amount": {
+        "name": "Next invoice amount"
+      },
+      "next_invoice_due": {
+        "name": "Next invoice due"
+      },
+      "last_read_date": {
+        "name": "Meter data up to"
+      }
+    }
+  }
+}

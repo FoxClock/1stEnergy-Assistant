@@ -1,4 +1,5 @@
 {
-    "name": "1st Energy",
-    "render_readme": true
+  "name": "1st Energy",
+  "render_readme": true,
+  "homeassistant": "2026.2.0"
 }

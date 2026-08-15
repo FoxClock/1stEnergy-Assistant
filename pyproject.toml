@@ -1,7 +1,53 @@
 [project]
-name = "1stenergy-assistant"
-version = "0.1.0"
-description = "Add your description here"
+name = "first-energy-hass"
+version = "0.0.1"
+description = "Home Assistant integration for Australian 1st Energy accounts"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14.2"
 dependencies = []
+
+# The integration itself ships no third-party dependencies: Home Assistant
+# already provides aiohttp, and the client is vendored inside
+# custom_components/first_energy/ because HACS copies only that directory.
+
+# aioresponses is deliberately absent: it patches ClientSession internals and
+# is broken against aiohttp 3.14. tests/fake_api.py serves real responses over
+# loopback instead, which exercises the genuine client path.
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    # Pulls in a matching Home Assistant itself, which is why homeassistant is
+    # not pinned separately here — pinning both invites a version conflict on
+    # every HA release. tests/test_config_flow.py and
+    # tests/test_statistics_import.py run against the real thing, including a
+    # real recorder database, and will not even import without this.
+    #
+    # Home Assistant 2026.3 moved to Python 3.14 and hard-requires 3.14.2, which
+    # is why requires-python above is set there rather than at 3.13. Trying to
+    # support both lines at once does not resolve: uv builds one universal
+    # lockfile, and no single version of this plugin spans the split.
+    "pytest-homeassistant-custom-component>=0.13.317",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+# The API is undocumented and its payloads are untyped dicts; parsers are the
+# boundary where that untyped data becomes typed domain objects.
+disallow_any_expr = false

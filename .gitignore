@@ -54,3 +54,29 @@ htmlcov/
 *.swp
 *.swo
 .DS_Store
+
+# ============================================================================
+# 1st Energy — reverse-engineering artefacts (Security)
+# ============================================================================
+# HAR captures contain a plaintext password, live tokens, NMI, address and
+# account number. These must never reach the repository.
+*.har
+*.har.gz
+har/
+captures/
+
+# Unsanitised fixture output. dev/fixtures/ IS committed (sanitised test data),
+# but anything marked raw stays local.
+dev/fixtures/raw/
+*.raw.json
+
+# ============================================================================
+# macOS SMB artefacts
+# ============================================================================
+# The projects share is mounted over SMB; macOS writes AppleDouble sidecars
+# next to every file. They are not source.
+._*
+.AppleDouble
+.Spotlight-V100
+.Trashes
+.smbdelete*

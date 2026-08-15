@@ -1,13 +1,13 @@
 {
   "domain": "first_energy",
   "name": "1st Energy",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "documentation": "https://github.com/FoxClock/1stEnergy-Assistant",
   "issue_tracker": "https://github.com/FoxClock/1stEnergy-Assistant/issues",
+  "codeowners": ["@FoxClock"],
   "requirements": [],
-  "codeowners": [
-    "@<you>"
-  ],
+  "dependencies": ["recorder"],
   "config_flow": true,
+  "integration_type": "hub",
   "iot_class": "cloud_polling"
 }
